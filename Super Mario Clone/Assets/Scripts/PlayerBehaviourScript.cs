@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerBehaviourScript : MonoBehaviour {
 
+	public float speed;
 
 	private Rigidbody2D playerRB2D;
 
@@ -15,12 +16,13 @@ public class PlayerBehaviourScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+
 	}
 
 	void FixedUpdate() {
-		//A simple test to help test if the camera will move with the player object.
-		if (Input.anyKeyDown) {
-			playerRB2D.AddForce (Vector2.right * 4,ForceMode2D.Impulse);
-		}
+
+		float move = Input.GetAxis("Horizontal");
+		playerRB2D.velocity = new Vector2(move * speed, playerRB2D.velocity.y);
+		
 	}
 }
