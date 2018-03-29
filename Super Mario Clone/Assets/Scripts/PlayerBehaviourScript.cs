@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerBehaviourScript : MonoBehaviour {
 
 	public float speed;
+	public float baseSpeed;
+	public float maxSpeed;
 	public float jumpForce;
 	public float jumpTime;
 	public float jumpTimeCounter;
@@ -53,6 +55,12 @@ public class PlayerBehaviourScript : MonoBehaviour {
 
 		//basic horizontal movement with a public speed variable
 		float move = Input.GetAxis("Horizontal");
+		if(Input.GetMouseButton(1) && speed < maxSpeed){
+			speed += 0.5f;
+		}
+		while(Input.GetMouseButtonUp(1) && speed > baseSpeed){
+			 speed -= 0.5f;
+		}
 		playerRB2D.velocity = new Vector2(move * speed, playerRB2D.velocity.y);
 
 		if((Input.GetMouseButton(0)) && !stoppedJumping)  {
