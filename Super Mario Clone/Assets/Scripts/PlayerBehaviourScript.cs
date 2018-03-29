@@ -15,8 +15,8 @@ public class PlayerBehaviourScript : MonoBehaviour {
 	public bool grounded;
 	public Transform groundCheck;
 	public LayerMask whatIsGround;
-	float groundRadius = 0.2f;
-
+	float groundRadius = 0.1f;
+ 
 	private Rigidbody2D playerRB2D;
 
 	// Use this for initialization
@@ -47,20 +47,18 @@ public class PlayerBehaviourScript : MonoBehaviour {
 			stoppedJumping = true;
 		}
 
-
-
+		while(Input.GetMouseButtonUp(1) && (speed > baseSpeed)){
+			 speed -= 0.5f;
+		}
 	}
 
 	void FixedUpdate() {
 
-		//basic horizontal movement with a public speed variable
 		float move = Input.GetAxis("Horizontal");
-		if(Input.GetMouseButton(1) && speed < maxSpeed){
+		if(Input.GetMouseButton(1) && speed < maxSpeed && grounded){
 			speed += 0.5f;
 		}
-		while(Input.GetMouseButtonUp(1) && speed > baseSpeed){
-			 speed -= 0.5f;
-		}
+		
 		playerRB2D.velocity = new Vector2(move * speed, playerRB2D.velocity.y);
 
 		if((Input.GetMouseButton(0)) && !stoppedJumping)  {
@@ -69,5 +67,6 @@ public class PlayerBehaviourScript : MonoBehaviour {
                 jumpTimeCounter -= Time.deltaTime;
             }
         }
+      
     }
 }

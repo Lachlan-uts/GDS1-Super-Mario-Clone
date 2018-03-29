@@ -228,6 +228,11 @@ Prefab:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 50492052918317798, guid: cd3d1c7ad1f7bba459cffe61d57c3fae,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 58139253907792656, guid: cd3d1c7ad1f7bba459cffe61d57c3fae, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: cd3d1c7ad1f7bba459cffe61d57c3fae, type: 2}
@@ -1151,7 +1156,7 @@ MonoBehaviour:
   groundCheck: {fileID: 1723235082}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 4294967039
+    m_Bits: 1
 --- !u!1 &1106746995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,7 +1207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1319669337}
   - component: {fileID: 1319669338}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Center Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1258,7 +1263,7 @@ GameObject:
   - component: {fileID: 1659231278}
   - component: {fileID: 1659231277}
   - component: {fileID: 1659231276}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1365,7 +1370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2029072941}
   - component: {fileID: 2029072942}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: First Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1418,7 +1423,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2134812029}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Camera Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
