@@ -3,13 +3,13 @@
 project="Super Mario Clone"
 
 echo "Attempting to build $project for Windows"
-/Applications/Unity/Unity.app/Contents/MacOS/Unity 
-  -batchmode 
-  -nographics 
-  -silent-crashes 
-  -logFile $(pwd)/unity.log 
-  -projectPath "$(pwd)/${UNITYCI_PROJECT_NAME}"
-  -buildWindowsPlayer "$(pwd)/Build/windows/$project.exe" 
+/Applications/Unity/Unity.app/Contents/MacOS/Unity \
+  -batchmode \
+  -nographics \
+  -silent-crashes \
+  -logFile $(pwd)/unity.log \
+  -projectPath "$(pwd)/${UNITYCI_PROJECT_NAME}" \
+  -buildWindowsPlayer "$(pwd)/Build/windows/${UNITYCI_PROJECT_NAME}.exe" \
   -quit
 
 echo "Attempting to build $project for OS X"
@@ -19,7 +19,7 @@ echo "Attempting to build $project for OS X"
   -silent-crashes 
   -logFile $(pwd)/unity.log 
   -projectPath "$(pwd)/${UNITYCI_PROJECT_NAME}" 
-  -buildOSXUniversalPlayer "$(pwd)/Build/osx/$project.app" 
+  -buildOSXUniversalPlayer "$(pwd)/Build/osx/${UNITYCI_PROJECT_NAME}.app" 
   -quit
 
 echo "Attempting to build $project for Linux"
@@ -29,7 +29,7 @@ echo "Attempting to build $project for Linux"
   -silent-crashes 
   -logFile $(pwd)/unity.log 
   -projectPath "$(pwd)/${UNITYCI_PROJECT_NAME}" 
-  -buildLinuxUniversalPlayer "$(pwd)/Build/linux/$project.exe" 
+  -buildLinuxUniversalPlayer "$(pwd)/Build/linux/${UNITYCI_PROJECT_NAME}.exe" 
   -quit
 
 echo 'Logs from build'
