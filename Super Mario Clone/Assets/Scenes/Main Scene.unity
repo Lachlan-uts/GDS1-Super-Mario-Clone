@@ -224,6 +224,10 @@ Prefab:
       propertyPath: m_Simulated
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1416633639421664, guid: cd3d1c7ad1f7bba459cffe61d57c3fae, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 58139253907792656, guid: cd3d1c7ad1f7bba459cffe61d57c3fae, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: cd3d1c7ad1f7bba459cffe61d57c3fae, type: 2}
@@ -968,6 +972,11 @@ GameObject:
   m_PrefabParentObject: {fileID: 1416633639421664, guid: cd3d1c7ad1f7bba459cffe61d57c3fae,
     type: 2}
   m_PrefabInternal: {fileID: 521587409}
+--- !u!4 &803143148 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4531548023969190, guid: cd3d1c7ad1f7bba459cffe61d57c3fae,
+    type: 2}
+  m_PrefabInternal: {fileID: 521587409}
 --- !u!60 &803143149
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1131,7 +1140,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2f7f47e250e714cb124b93775a2691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 5
+  jumpForce: 4
+  jumpTime: 0.5
+  jumpTimeCounter: 0
+  stoppedJumping: 0
+  grounded: 0
+  groundCheck: {fileID: 1723235082}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 4294967039
 --- !u!1 &1106746995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,6 +1324,34 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2134812029}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1723235081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1723235082}
+  m_Layer: 8
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1723235082
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1723235081}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.56, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 803143148}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2029072940
