@@ -9,3 +9,8 @@ install:
 - ./Scripts/install.sh
 script:
 - ./Scripts/build.sh
+
+# Global bash variables
+env:
+  global:
+- UNITYCI_PROJECT_NAME="Super Mario Clone"
