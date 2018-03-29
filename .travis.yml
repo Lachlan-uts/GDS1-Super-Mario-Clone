@@ -13,4 +13,4 @@ script:
 # Global bash variables
 env:
   global:
-- UNITYCI_PROJECT_NAME="Super Mario Clone"
+  - UNITYCI_PROJECT_NAME="Super Mario Clone"
