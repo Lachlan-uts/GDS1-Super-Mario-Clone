@@ -13,23 +13,23 @@ echo "Attempting to build $project for Windows"
   -quit
 
 echo "Attempting to build $project for OS X"
-/Applications/Unity/Unity.app/Contents/MacOS/Unity 
-  -batchmode 
-  -nographics 
-  -silent-crashes 
-  -logFile $(pwd)/unity.log 
-  -projectPath "$(pwd)/${UNITYCI_PROJECT_NAME}" 
-  -buildOSXUniversalPlayer "$(pwd)/Build/osx/${UNITYCI_PROJECT_NAME}.app" 
+/Applications/Unity/Unity.app/Contents/MacOS/Unity \
+  -batchmode \
+  -nographics \
+  -silent-crashes \
+  -logFile $(pwd)/unity.log \
+  -projectPath "$(pwd)/${UNITYCI_PROJECT_NAME}" \
+  -buildOSXUniversalPlayer "$(pwd)/Build/osx/${UNITYCI_PROJECT_NAME}.app" \
   -quit
 
 echo "Attempting to build $project for Linux"
-/Applications/Unity/Unity.app/Contents/MacOS/Unity 
-  -batchmode 
-  -nographics 
-  -silent-crashes 
-  -logFile $(pwd)/unity.log 
-  -projectPath "$(pwd)/${UNITYCI_PROJECT_NAME}" 
-  -buildLinuxUniversalPlayer "$(pwd)/Build/linux/${UNITYCI_PROJECT_NAME}.exe" 
+/Applications/Unity/Unity.app/Contents/MacOS/Unity \
+  -batchmode \
+  -nographics \
+  -silent-crashes \
+  -logFile $(pwd)/unity.log \
+  -projectPath "$(pwd)/${UNITYCI_PROJECT_NAME}" \
+  -buildLinuxUniversalPlayer "$(pwd)/Build/linux/${UNITYCI_PROJECT_NAME}.exe" \
   -quit
 
 echo 'Logs from build'
