@@ -31,6 +31,12 @@ public class PlayerBehaviourScript : MonoBehaviour {
 
 	private bool facingRight;
 
+	//Timer branch with Respawn
+	public int currentHealth;
+	bool isDead;
+	bool damaged;
+
+
 	// Use this for initialization
 	void Start () {
 
@@ -40,6 +46,7 @@ public class PlayerBehaviourScript : MonoBehaviour {
 
 		healthState = 0; // In short, take a single hit, death ensues
 		livesCount = 3;
+		currentHealth = livesCount;
 		facingRight = true;
 
 	}
@@ -86,7 +93,7 @@ public class PlayerBehaviourScript : MonoBehaviour {
                 jumpTimeCounter -= Time.deltaTime;
             }
         }
-      
+		Debug.Log (currentHealth);
     }
 
 	void test(){
@@ -131,5 +138,24 @@ public class PlayerBehaviourScript : MonoBehaviour {
 
 		}
 	}
+	//Timer branch with Respawn
+	public void takeDamage(int amount)
+	{
+		
+		damaged = true;
+		currentHealth -= amount;
 
+		if (currentHealth <= 0 && !isDead) {
+			death ();
+		}
+	}
+
+	void death()
+	{
+		isDead = true;
+		Debug.Log ("Dead");
+		//Restart Game
+
+
+	}
 }

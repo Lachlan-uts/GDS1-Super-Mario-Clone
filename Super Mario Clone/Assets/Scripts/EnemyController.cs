@@ -17,13 +17,29 @@ public class EnemyController : MonoBehaviour {
 	public LayerMask whatIsGround;
 	float groundRadius = 0.1f;
 
+	//Timer Branch 
+	GameObject player;
+	PlayerBehaviourScript playerScript;
+	private int enemyDamage = 1;
+
+	void Start()
+	{
+		player = GameObject.FindGameObjectWithTag ("Player");
+		playerScript = player.GetComponent<PlayerBehaviourScript> ();
+	}
+
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.name == "Player") {
 			Debug.Log ("If Player is Small, Player Dies, if Player is Super lose a power up");
-			Destroy (other.gameObject);
-			//Have a manager to manage the respawn of the player
-			//gameManager.RespawnPlayer ();
+
+			if(playerScript.currentHealth <= 3 && playerScript.currentHealth != 0)
+			{
+				playerScript.takeDamage(enemyDamage);
+			}
+			if (playerScript.currentHealth <= 0) {
+				Destroy (other.gameObject);
+			}
 		}
 	}
 

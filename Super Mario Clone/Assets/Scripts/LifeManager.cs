@@ -1,32 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class InstantDeath : MonoBehaviour {
-
+public class LifeManager : MonoBehaviour {
+	
 	PlayerBehaviourScript playerScript;
-	private int enemyDamage = 1;
 	GameObject player;
+	private Text lifeText;
+	public int currentLife;
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		playerScript = player.GetComponent<PlayerBehaviourScript> ();
+		lifeText = GetComponent<Text> ();
+		lifeText.text = "Life: " + playerScript.currentHealth;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		currentLife = playerScript.currentHealth;
+		UpdateLife ();
 	}
 
-	//Instant Death
-	void OnTriggerEnter2D(Collider2D other)
+	void UpdateLife()
 	{
-		if(other.name == "Player")
-		{
-			Debug.Log ("Player Dies, Respawn and Lose 1 Life");
-			Destroy (other.gameObject);
-			//Have a manager to manage the respawn of the player
-			//gameManager.RespawnPlayer ();
+		if (lifeText != null) {
+			lifeText.text = "Life: " + playerScript.currentHealth;
+
 		}
-}
+	}
 }

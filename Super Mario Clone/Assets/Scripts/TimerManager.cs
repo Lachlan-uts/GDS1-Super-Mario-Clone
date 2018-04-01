@@ -10,6 +10,7 @@ public class TimerManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		StartCountdownTimer ();
+		timerText = GetComponent<Text> ();
 	}
 
 	void StartCountdownTimer()
@@ -33,5 +34,12 @@ public class TimerManager : MonoBehaviour {
 		}
 				}
 
+
+	void Update()
+	{
+		if (time <= 0) {
+			Destroy (GameObject.FindGameObjectWithTag("Player"));
+		}
+	}
 
 }
