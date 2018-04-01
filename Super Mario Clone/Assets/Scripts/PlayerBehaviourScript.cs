@@ -31,6 +31,8 @@ public class PlayerBehaviourScript : MonoBehaviour {
 
 	private bool facingRight;
 
+	private GameObject pipeToUse; // Important for usage of pipes
+
 	// Use this for initialization
 	void Start () {
 
@@ -41,6 +43,7 @@ public class PlayerBehaviourScript : MonoBehaviour {
 		healthState = 0; // In short, take a single hit, death ensues
 		livesCount = 3;
 		facingRight = true;
+		pipeToUse = null;
 
 	}
 	
@@ -86,6 +89,38 @@ public class PlayerBehaviourScript : MonoBehaviour {
                 jumpTimeCounter -= Time.deltaTime;
             }
         }
+
+		if (Input.GetKeyDown (KeyCode.DownArrow)) {
+			if (pipeToUse != null) {
+				if (pipeToUse.GetComponent<PipeScript> ().entryAngle == 0) {
+					pipeToUse.GetComponent<PipeScript> ().enterPipe (gameObject);
+				}
+			}
+		}
+
+		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+			if (pipeToUse != null) {
+				if (pipeToUse.GetComponent<PipeScript> ().entryAngle == 1) {
+					pipeToUse.GetComponent<PipeScript> ().enterPipe (gameObject);
+				}
+			}
+		}
+
+		if (Input.GetKeyDown (KeyCode.UpArrow)) {
+			if (pipeToUse != null) {
+				if (pipeToUse.GetComponent<PipeScript> ().entryAngle == 2) {
+					pipeToUse.GetComponent<PipeScript> ().enterPipe (gameObject);
+				}
+			}
+		}
+
+		if (Input.GetKeyDown (KeyCode.RightArrow)) {
+			if (pipeToUse != null) {
+				if (pipeToUse.GetComponent<PipeScript> ().entryAngle == 3) {
+					pipeToUse.GetComponent<PipeScript> ().enterPipe (gameObject);
+				}
+			}
+		}
       
     }
 
@@ -117,7 +152,7 @@ public class PlayerBehaviourScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.tag == "Powerup") { // If the player comes into contact with a powerup
-			Debug.Log("CollisionWithPowerup");
+			Debug.Log ("CollisionWithPowerup");
 			if (healthState == 0 && other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 0) {
 				healthState++;
 				Debug.Log ("Mushroom");
@@ -129,7 +164,17 @@ public class PlayerBehaviourScript : MonoBehaviour {
 				Debug.Log ("1-UP");
 			}
 
+		} else {
+			if (other.gameObject.GetComponent<PipeScript> () != null) {
+				pipeToUse = other.gameObject;
+			}
 		}
+
+
+	}
+
+	void OnCollisionExit2D(Collision2D other) {
+		pipeToUse = null;
 	}
 
 }
