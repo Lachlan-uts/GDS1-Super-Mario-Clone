@@ -32,4 +32,9 @@ public class CameraMovementScript : MonoBehaviour {
 
 		isFixed = newFixedStatus;
 	}
+
+	public void warpTo(float newX, float newY) {
+		gameObject.transform.position = new Vector2 (newX, newY);
+
+	}
 }
