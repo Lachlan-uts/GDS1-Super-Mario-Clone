@@ -18,6 +18,11 @@ public class FireballScript : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
-		FB2DRB.AddForce (Vector2.up * 3, ForceMode2D.Impulse);
+		if (other.gameObject.tag == "Enemy") {
+			Destroy (other.gameObject);
+			Destroy (gameObject);
+		} else {
+			FB2DRB.AddForce (Vector2.up * 3, ForceMode2D.Impulse);
+		}
 	}
 }
