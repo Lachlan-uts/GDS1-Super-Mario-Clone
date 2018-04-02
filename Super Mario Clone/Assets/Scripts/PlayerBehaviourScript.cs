@@ -151,24 +151,28 @@ public class PlayerBehaviourScript : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
-		if (other.gameObject.tag == "Powerup") { // If the player comes into contact with a powerup
-			Debug.Log ("CollisionWithPowerup");
-			if (healthState == 0 && other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 0) {
-				healthState++;
-				Debug.Log ("Mushroom");
-			} else if (healthState < 2 && other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 1) {
-				healthState = 2;
-				Debug.Log ("Fire Flower");
-			} else if (other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 2) {
-				livesCount++;
-				Debug.Log ("1-UP");
-			}
+        if (other.gameObject.tag == "Powerup") { // If the player comes into contact with a powerup
+            Debug.Log("CollisionWithPowerup");
+            if (healthState == 0 && other.gameObject.GetComponent<PowerupBehaviourScript>().typeOfPower == 0) {
+                healthState++;
+                Debug.Log("Mushroom");
+            } else if (healthState < 2 && other.gameObject.GetComponent<PowerupBehaviourScript>().typeOfPower == 1) {
+                healthState = 2;
+                Debug.Log("Fire Flower");
+            } else if (other.gameObject.GetComponent<PowerupBehaviourScript>().typeOfPower == 2) {
+                livesCount++;
+                Debug.Log("1-UP");
+            }
 
-		} else {
-			if (other.gameObject.GetComponent<PipeScript> () != null) {
-				pipeToUse = other.gameObject;
-			}
-		}
+        }
+        else if (other.gameObject.tag == "Coin") {
+            Debug.Log("Coin");
+        }
+        else {
+            if (other.gameObject.GetComponent<PipeScript>() != null) {
+                pipeToUse = other.gameObject;
+            }
+        }
 
 
 	}

@@ -8,6 +8,7 @@ TagManager:
   - Powerup
   - Pit
   - Ground
+  - Coin
   layers:
   - Default
   - TransparentFX
