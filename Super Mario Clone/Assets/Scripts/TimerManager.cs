@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class TimerManager : MonoBehaviour {
 	public Text timerText;
 	private float time = 1200;
-
+    private float originalTime = 1200;
 
 	// Use this for initialization
 	void Start () {
@@ -13,14 +13,13 @@ public class TimerManager : MonoBehaviour {
 		timerText = GetComponent<Text> ();
 	}
 
-	void StartCountdownTimer()
-	{
-		if (timerText != null) {
-			time = 1200;
-			timerText.text = "Time Left: 20:00:000";
-			InvokeRepeating ("UpdateTimer", 0.0f, 0.01667f);
-		}
-
+    public void StartCountdownTimer()
+    {
+        if (timerText != null) {
+        time = 1200;
+        timerText.text = "Time Left: 20:00:000";
+        InvokeRepeating("UpdateTimer", 0.0f, 0.01667f);
+        }
 	}
 
 	void UpdateTimer()
@@ -41,5 +40,12 @@ public class TimerManager : MonoBehaviour {
 			Destroy (GameObject.FindGameObjectWithTag("Player"));
 		}
 	}
+
+    public void RestartTimer()
+    {
+        time = 1200;
+        timerText.text = "Time Left: 20:00:000";
+
+    }
 
 }
