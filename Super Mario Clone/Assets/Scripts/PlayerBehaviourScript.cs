@@ -121,6 +121,14 @@ public class PlayerBehaviourScript : MonoBehaviour {
 				}
 			}
 		}
+
+		if (Input.GetKeyDown (KeyCode.Z)) {
+			Debug.Log ("Z");
+			if (healthState >= 2) {
+				CreateFireball ();
+				Debug.Log ("Fire ball");
+			}
+		}
       
     }
 

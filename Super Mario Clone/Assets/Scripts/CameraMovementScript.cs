@@ -18,7 +18,7 @@ public class CameraMovementScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!isFixed) {
+		if (!isFixed && player != null) {
 			if (player.transform.position.x > gameObject.transform.position.x) {
 				gameObject.transform.position = Vector2.MoveTowards (gameObject.transform.position, 
 					new Vector2 (player.transform.position.x, gameObject.transform.position.y),
