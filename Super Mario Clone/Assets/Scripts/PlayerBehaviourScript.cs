@@ -31,6 +31,7 @@ public class PlayerBehaviourScript : MonoBehaviour {
 
     private bool facingRight;
 
+<<<<<<< HEAD
     //Timer branch with Respawn
     public int currentHealth;
     bool isDead;
@@ -38,13 +39,26 @@ public class PlayerBehaviourScript : MonoBehaviour {
     //Small Mario & Big Mario
     bool bigMario;
     RespawnManager respawnManager;
+=======
+	private GameObject pipeToUse; // Important for usage of pipes
+
+	// Use this for initialization
+	void Start () {
+>>>>>>> master
 
     // Use this for initialization
     void Start() {
 
         playerRB2D = GetComponent<Rigidbody2D>();
 
+<<<<<<< HEAD
         jumpTimeCounter = jumpTime;
+=======
+		healthState = 0; // In short, take a single hit, death ensues
+		livesCount = 3;
+		facingRight = true;
+		pipeToUse = null;
+>>>>>>> master
 
         healthState = 0; // In short, take a single hit, death ensues
         livesCount = 3;
@@ -96,6 +110,7 @@ public class PlayerBehaviourScript : MonoBehaviour {
                 jumpTimeCounter -= Time.deltaTime;
             }
         }
+<<<<<<< HEAD
         Debug.Log(currentHealth);
     }
 
@@ -122,6 +137,103 @@ public class PlayerBehaviourScript : MonoBehaviour {
         } else {
             newFireball.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 3.0f, ForceMode2D.Impulse);
         }
+=======
+
+		if (Input.GetKeyDown (KeyCode.DownArrow)) {
+			if (pipeToUse != null) {
+				if (pipeToUse.GetComponent<PipeScript> ().entryAngle == 0) {
+					pipeToUse.GetComponent<PipeScript> ().enterPipe (gameObject);
+				}
+			}
+		}
+
+		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+			if (pipeToUse != null) {
+				if (pipeToUse.GetComponent<PipeScript> ().entryAngle == 1) {
+					pipeToUse.GetComponent<PipeScript> ().enterPipe (gameObject);
+				}
+			}
+		}
+
+		if (Input.GetKeyDown (KeyCode.UpArrow)) {
+			if (pipeToUse != null) {
+				if (pipeToUse.GetComponent<PipeScript> ().entryAngle == 2) {
+					pipeToUse.GetComponent<PipeScript> ().enterPipe (gameObject);
+				}
+			}
+		}
+
+		if (Input.GetKeyDown (KeyCode.RightArrow)) {
+			if (pipeToUse != null) {
+				if (pipeToUse.GetComponent<PipeScript> ().entryAngle == 3) {
+					pipeToUse.GetComponent<PipeScript> ().enterPipe (gameObject);
+				}
+			}
+		}
+
+		if (Input.GetKeyDown (KeyCode.Z)) {
+			Debug.Log ("Z");
+			if (healthState >= 2) {
+				CreateFireball ();
+				Debug.Log ("Fire ball");
+			}
+		}
+      
+    }
+
+	void test(){
+		//Missing void name on my end - Rowena
+		//A simple test to help test if the camera will move with the player object.
+		if (Input.GetKeyDown(KeyCode.RightArrow)) {
+			playerRB2D.AddForce (Vector2.right * 4,ForceMode2D.Impulse);
+		}
+
+		if (Input.GetKeyDown (KeyCode.Z)) {
+			Debug.Log ("Z");
+			if (healthState >= 2) {
+				CreateFireball ();
+				Debug.Log ("Fire ball");
+			}
+		}
+	}
+
+	void CreateFireball() {
+		GameObject newFireball = Instantiate (fireball, gameObject.transform.position, Quaternion.identity) as GameObject;
+		if (facingRight) {
+			newFireball.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * 3.0f, ForceMode2D.Impulse);
+		} else {
+			newFireball.GetComponent<Rigidbody2D> ().AddForce (Vector2.left * 3.0f, ForceMode2D.Impulse);
+		}
+
+	}
+
+	void OnCollisionEnter2D(Collision2D other) {
+		if (other.gameObject.tag == "Powerup") { // If the player comes into contact with a powerup
+			Debug.Log ("CollisionWithPowerup");
+			if (healthState == 0 && other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 0) {
+				healthState++;
+				Debug.Log ("Mushroom");
+			} else if (healthState < 2 && other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 1) {
+				healthState = 2;
+				Debug.Log ("Fire Flower");
+			} else if (other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 2) {
+				livesCount++;
+				Debug.Log ("1-UP");
+			}
+
+		} else {
+			if (other.gameObject.GetComponent<PipeScript> () != null) {
+				pipeToUse = other.gameObject;
+			}
+		}
+
+
+	}
+
+	void OnCollisionExit2D(Collision2D other) {
+		pipeToUse = null;
+	}
+>>>>>>> master
 
     }
 
