@@ -47,4 +47,18 @@ public class EnemyController : MonoBehaviour {
 			GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
 		}
 	}
+
+	void OnCollisionEnter2D(Collision2D other) {
+
+
+		ContactPoint2D[] contacts = new ContactPoint2D[10];
+		//contacts. other.GetContacts;
+
+		Debug.Log ("contacted");
+		foreach (ContactPoint2D contact in other.contacts) {
+			Debug.DrawRay (contact.point, contact.normal, Color.white, 4.0f);
+
+			Debug.Log ("contacted and foreached");
+		}
+	}
 }
