@@ -21,7 +21,8 @@ GameObject:
   - component: {fileID: 4703275595793326}
   - component: {fileID: 212669582678610630}
   - component: {fileID: 50322361023447760}
-  - component: {fileID: 60564721599167478}
+  - component: {fileID: 114462998274629380}
+  - component: {fileID: 61779622171803460}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -61,9 +62,9 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!60 &60564721599167478
-PolygonCollider2D:
+  m_Constraints: 4
+--- !u!61 &61779622171803460
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -84,14 +85,30 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0, y: 0.5}
-      - {x: -0.43301272, y: 0.24999999}
-      - {x: -0.4330127, y: -0.25000003}
-      - {x: 0.00000004371139, y: -0.5}
-      - {x: 0.43301272, y: -0.24999996}
-      - {x: 0.43301272, y: 0.24999996}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &114462998274629380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1369728934121076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9b7219ae1fb8c6439171d872a9f7c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
+  wallCheck: {fileID: 0}
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 0
+  grounded: 0
+  groundCheck: {fileID: 0}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!212 &212669582678610630
 SpriteRenderer:
   m_ObjectHideFlags: 1
