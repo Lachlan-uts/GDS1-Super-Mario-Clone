@@ -122,7 +122,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4150809219246678, guid: e78756470deb24841bd15134958298a8, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4150809219246678, guid: e78756470deb24841bd15134958298a8, type: 2}
       propertyPath: m_LocalPosition.y
@@ -151,6 +151,41 @@ Prefab:
     - target: {fileID: 4150809219246678, guid: e78756470deb24841bd15134958298a8, type: 2}
       propertyPath: m_RootOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114922636044988810, guid: e78756470deb24841bd15134958298a8,
+        type: 2}
+      propertyPath: moveSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114922636044988810, guid: e78756470deb24841bd15134958298a8,
+        type: 2}
+      propertyPath: wallCheck
+      value: 
+      objectReference: {fileID: 560945108}
+    - target: {fileID: 114922636044988810, guid: e78756470deb24841bd15134958298a8,
+        type: 2}
+      propertyPath: whatIsWall.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114922636044988810, guid: e78756470deb24841bd15134958298a8,
+        type: 2}
+      propertyPath: groundCheck
+      value: 
+      objectReference: {fileID: 1723235082}
+    - target: {fileID: 114922636044988810, guid: e78756470deb24841bd15134958298a8,
+        type: 2}
+      propertyPath: whatIsGround.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 114922636044988810, guid: e78756470deb24841bd15134958298a8,
+        type: 2}
+      propertyPath: grounded
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114922636044988810, guid: e78756470deb24841bd15134958298a8,
+        type: 2}
+      propertyPath: squash
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e78756470deb24841bd15134958298a8, type: 2}
@@ -1029,6 +1064,24 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
+  - first: {x: 26, y: -2, z: 0}
+    second:
+      m_TileIndex: 1
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
+  - first: {x: 31, y: -2, z: 0}
+    second:
+      m_TileIndex: 1
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
   - first: {x: 9, y: -1, z: 0}
     second:
       m_TileIndex: 1
@@ -1213,15 +1266,15 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 94
+  - m_RefCount: 96
     m_Data: {fileID: 11400000, guid: 195011493dce7644289e8ceea5f13643, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 94
+  - m_RefCount: 96
     m_Data: {fileID: 21300000, guid: c66453adaa9d7524c89b5b0eab30ec16, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   m_TileMatrixArray:
-  - m_RefCount: 94
+  - m_RefCount: 96
     m_Data:
       e00: 1
       e01: 0
@@ -1240,7 +1293,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 94
+  - m_RefCount: 96
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 0
     m_Data: {r: 0, g: 0, b: 21.722155, a: 1e-45}
@@ -1323,7 +1376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &656401213
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1443,6 +1496,15 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 256
+  wallCheck: {fileID: 0}
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 0
+  grounded: 0
+  groundCheck: {fileID: 0}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &803143145 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1416633639421664, guid: cd3d1c7ad1f7bba459cffe61d57c3fae,
@@ -1624,8 +1686,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.08, y: 2.04}
+    pivot: {x: 0.24, y: 0.5}
+    oldSize: {x: 2, y: 1}
     newSize: {x: 4.08, y: 2.04}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
