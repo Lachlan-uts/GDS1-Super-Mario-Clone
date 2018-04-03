@@ -10,6 +10,7 @@ TagManager:
   - Ground
   - RespawnPoint
   - RespawnManager
+  - Timer
   layers:
   - Default
   - TransparentFX

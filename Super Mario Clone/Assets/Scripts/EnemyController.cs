@@ -22,13 +22,13 @@ public class EnemyController : MonoBehaviour {
 	GameObject player;
 	PlayerBehaviourScript playerScript;
 	private int enemyDamage = 1;
-	RespawnManager respawnManager;
+	//RespawnManager respawnManager;
 
 	void Start()
 	{
 		player = GameObject.FindGameObjectWithTag ("Player");
 		playerScript = player.GetComponent<PlayerBehaviourScript> ();
-		respawnManager = GameObject.FindGameObjectWithTag("RespawnManager").GetComponent<RespawnManager>();
+		//respawnManager = GameObject.FindGameObjectWithTag("RespawnManager").GetComponent<RespawnManager>();
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -36,12 +36,13 @@ public class EnemyController : MonoBehaviour {
 		if (other.name == "Player") {
 			Debug.Log ("If Player is Small, Player Dies, if Player is Super lose a power up");
 
-			if(playerScript.currentHealth <= 3 && playerScript.currentHealth != 0)
-			{
-				playerScript.takeDamage(enemyDamage);
-				respawnManager.RespawnPlayer();
-
-			}
+            
+            if (playerScript.currentHealth != 0)
+            {
+                playerScript.takeDamage(enemyDamage);
+                
+            }
+            
 			if (playerScript.currentHealth <= 0) {
 
 				//Reload Application insert code here

@@ -14,9 +14,6 @@ public class InstantDeath : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	//Instant Death
 	void OnTriggerEnter2D(Collider2D other)
