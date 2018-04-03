@@ -7,10 +7,13 @@ public class InstantDeath : MonoBehaviour {
 	PlayerBehaviourScript playerScript;
 	private int enemyDamage = 1;
 	GameObject player;
+	RespawnManager respawnManager;
+
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		playerScript = player.GetComponent<PlayerBehaviourScript> ();
+		respawnManager = GameObject.FindGameObjectWithTag("RespawnManager").GetComponent<RespawnManager>();
 	}
 	
 	// Update is called once per frame
@@ -21,9 +24,10 @@ public class InstantDeath : MonoBehaviour {
 		if(other.name == "Player")
 		{
 			Debug.Log ("Player Dies, Respawn and Lose 1 Life");
-			Destroy (other.gameObject);
+			//Destroy (other.gameObject);
 			//Have a manager to manage the respawn of the player
-			//gameManager.RespawnPlayer ();
+			respawnManager.RespawnPlayer();
+
 		}
 }
 }
