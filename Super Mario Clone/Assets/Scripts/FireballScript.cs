@@ -6,15 +6,25 @@ public class FireballScript : MonoBehaviour {
 
 	// private variables
 	private Rigidbody2D FB2DRB;
+	private bool canDestroy;
 
 	// Use this for initialization
 	void Start () {
 		FB2DRB = GetComponent<Rigidbody2D> ();
+		canDestroy = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (FB2DRB.velocity.Equals (new Vector2 (0.0f, 0.0f))) {
+			if (!canDestroy) {
+				canDestroy = true;
+			} else {
+				Destroy (gameObject);
+			}
+		} else {
+			canDestroy = false;
+		}
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
