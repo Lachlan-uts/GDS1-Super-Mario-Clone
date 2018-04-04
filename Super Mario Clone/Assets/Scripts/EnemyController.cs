@@ -49,11 +49,19 @@ public class EnemyController : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D other) {
 
+		if (other.gameObject.tag == "Player") {
+			Debug.Log ("If Player is Small, Player Dies, if Player is Super lose a power up");
+			//Destroy (other.gameObject);
+			//Have a manager to manage the respawn of the player
+			//gameManager.RespawnPlayer ();
+		}
 
 		ContactPoint2D[] contacts = new ContactPoint2D[4];
 		int contactsLength = other.GetContacts (contacts);
 		Debug.Log ("contact length = " + contactsLength);
 		//contacts. other.GetContacts;
+
+
 
 		Debug.Log ("contacted");
 		foreach (ContactPoint2D contact in contacts) {
