@@ -121,6 +121,14 @@ public class PlayerBehaviourScript : MonoBehaviour {
 				}
 			}
 		}
+
+		if (Input.GetKeyDown (KeyCode.Z)) {
+			Debug.Log ("Z");
+			if (healthState >= 2) {
+				CreateFireball ();
+				Debug.Log ("Fire ball");
+			}
+		}
       
     }
 
@@ -151,18 +159,30 @@ public class PlayerBehaviourScript : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.tag == "Powerup") { // If the player comes into contact with a powerup
-            Debug.Log("CollisionWithPowerup");
-            if (healthState == 0 && other.gameObject.GetComponent<PowerupBehaviourScript>().typeOfPower == 0) {
-                healthState++;
-                Debug.Log("Mushroom");
-            } else if (healthState < 2 && other.gameObject.GetComponent<PowerupBehaviourScript>().typeOfPower == 1) {
-                healthState = 2;
-                Debug.Log("Fire Flower");
-            } else if (other.gameObject.GetComponent<PowerupBehaviourScript>().typeOfPower == 2) {
-                livesCount++;
-                Debug.Log("1-UP");
-            }
+
+		ContactPoint2D[] contacts = new ContactPoint2D[10];
+		//contacts. other.GetContacts;
+
+		Debug.Log ("contacted");
+		foreach (ContactPoint2D contact in other.contacts) {
+			Debug.DrawRay (contact.point, contact.normal, Color.white, 4.0f);
+
+			Debug.Log ("contacted and foreached");
+		}
+
+
+		if (other.gameObject.tag == "Powerup") { // If the player comes into contact with a powerup
+			Debug.Log ("CollisionWithPowerup");
+			if (healthState == 0 && other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 0) {
+				healthState++;
+				Debug.Log ("Mushroom");
+			} else if (healthState < 2 && other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 1) {
+				healthState = 2;
+				Debug.Log ("Fire Flower");
+			} else if (other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 2) {
+				livesCount++;
+				Debug.Log ("1-UP");
+			}
 
         }
         else if (other.gameObject.tag == "Coin") {
