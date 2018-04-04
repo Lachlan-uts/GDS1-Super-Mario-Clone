@@ -59,8 +59,10 @@ public class EnemyController : MonoBehaviour {
 		foreach (ContactPoint2D contact in contacts) {
 			Debug.DrawRay (contact.point, contact.normal, Color.white, 4.0f);
 			Debug.Log (contact.relativeVelocity.x);
+			Debug.Log ("the contact normal " + contact.normal);
+			Debug.Log ("the contact point " + contact.point);
 		}
-		if (contacts [0].relativeVelocity.x < 0) {
+		if (contacts [0].relativeVelocity.x < 0 && contacts[0].point.y > this.transform.position.y) {
 			Debug.Log ("trying to change velocity");
 			//enemyRB2D.velocity.Set (-(contacts [0].relativeVelocity.x), enemyRB2D.velocity.y);
 
@@ -68,7 +70,7 @@ public class EnemyController : MonoBehaviour {
 			enemyRB2D.velocity = new Vector2(-2,enemyRB2D.velocity.y);
 //			enemyRB2D.AddForce (Vector2.left * 2, ForceMode2D.Impulse);
 			Debug.Log (enemyRB2D.velocity);
-		} else if (contacts [0].relativeVelocity.x > 0) {
+		} else if (contacts [0].relativeVelocity.x > 0 && contacts[0].point.y > this.transform.position.y) {
 			
 			enemyRB2D.velocity = new Vector2(2,enemyRB2D.velocity.y);
 //			enemyRB2D.AddForce (Vector2.right * 2, ForceMode2D.Impulse);
