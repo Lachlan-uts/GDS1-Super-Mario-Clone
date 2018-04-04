@@ -160,7 +160,6 @@ public class PlayerBehaviourScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D other) {
 
-
 		ContactPoint2D[] contacts = new ContactPoint2D[10];
 		//contacts. other.GetContacts;
 
@@ -185,11 +184,15 @@ public class PlayerBehaviourScript : MonoBehaviour {
 				Debug.Log ("1-UP");
 			}
 
-		} else {
-			if (other.gameObject.GetComponent<PipeScript> () != null) {
-				pipeToUse = other.gameObject;
-			}
-		}
+        }
+        else if (other.gameObject.tag == "Coin") {
+            Debug.Log("Coin");
+        }
+        else {
+            if (other.gameObject.GetComponent<PipeScript>() != null) {
+                pipeToUse = other.gameObject;
+            }
+        }
 
 
 	}
