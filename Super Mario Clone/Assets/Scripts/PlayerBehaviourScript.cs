@@ -145,7 +145,7 @@ public class PlayerBehaviourScript : MonoBehaviour {
 				Debug.Log ("Fire ball");
 			}
 		}
-
+      
     }
 
 	void test(){
@@ -175,13 +175,6 @@ public class PlayerBehaviourScript : MonoBehaviour {
 	}
 
 //	void OnCollisionEnter2D(Collision2D other) {
-
-// Debug.Log ("contacted");
-// foreach (ContactPoint2D contact in other.contacts) {
-//     Debug.DrawRay (contact.point, contact.normal, Color.white, 4.0f);
-//
-//     Debug.Log ("contacted and foreached");
-// }
 //		if (other.gameObject.tag == "Powerup") { // If the player comes into contact with a powerup
 //			Debug.Log ("CollisionWithPowerup");
 //			if (healthState == 0 && other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 0) {
@@ -236,7 +229,7 @@ public class PlayerBehaviourScript : MonoBehaviour {
 
         }
     }
-    //Timer branch with Respawn, works with 1 up prefab and fireflower
+    //Timer branch with Respawn, works with 1 up prefab and fireflower 
     public void takeDamage(int amount)
     {
         if (bigMario == false)
