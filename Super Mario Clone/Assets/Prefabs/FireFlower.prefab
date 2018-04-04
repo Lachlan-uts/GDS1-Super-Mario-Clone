@@ -22,10 +22,10 @@ GameObject:
   - component: {fileID: 212658743096030810}
   - component: {fileID: 61147180960669340}
   - component: {fileID: 50800651900375898}
-  - component: {fileID: 114556809746619828}
-  m_Layer: 0
+  - component: {fileID: 114564765442444218}
+  m_Layer: 12
   m_Name: FireFlower
-  m_TagString: Powerup
+  m_TagString: Fire Flower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1438197395517372}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8343391, y: -1.3679453, z: 0}
+  m_LocalPosition: {x: 0, y: 1.1, z: 0}
   m_LocalScale: {x: 0.45, y: 0.45, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -62,7 +62,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61147180960669340
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -88,7 +88,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.04, y: 1.74}
   m_EdgeRadius: 0
---- !u!114 &114556809746619828
+--- !u!114 &114564765442444218
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -96,10 +96,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1438197395517372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7eb7bd2fada7ad5479a178b2c71af77b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5182363cd8765ae4c95df4bbf90e93d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeOfPower: 1
 --- !u!212 &212658743096030810
 SpriteRenderer:
   m_ObjectHideFlags: 1

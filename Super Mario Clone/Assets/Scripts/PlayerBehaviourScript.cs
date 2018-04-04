@@ -12,6 +12,7 @@ public class PlayerBehaviourScript : MonoBehaviour {
 	public float jumpTimeCounter;
 	public bool stoppedJumping;
 
+
 	public bool grounded;
 	public Transform groundCheck;
 	public LayerMask whatIsGround;
@@ -33,6 +34,8 @@ public class PlayerBehaviourScript : MonoBehaviour {
 
 	private GameObject pipeToUse; // Important for usage of pipes
 
+    private int levelOfPower;
+
 	// Use this for initialization
 	void Start () {
 
@@ -44,6 +47,7 @@ public class PlayerBehaviourScript : MonoBehaviour {
 		livesCount = 3;
 		facingRight = true;
 		pipeToUse = null;
+        levelOfPower = 0;
 
 	}
 	
@@ -160,19 +164,31 @@ public class PlayerBehaviourScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.tag == "Powerup") { // If the player comes into contact with a powerup
-			Debug.Log ("CollisionWithPowerup");
-			if (healthState == 0 && other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 0) {
-				healthState++;
+			Debug.Log ("CollisionWithPowerupBlock");
+			if (healthState == 0 && other.gameObject.GetComponent<PowerupBehaviourScript>().CounterCheck()) {
 				Debug.Log ("Mushroom");
-			} else if (healthState < 2 && other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 1) {
+			} else if (healthState == 1 && other.gameObject.GetComponent<PowerupBehaviourScript>().CounterCheck()) {
 				healthState = 2;
 				Debug.Log ("Fire Flower");
-			} else if (other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 2) {
+			} else if (healthState == 2 && other.gameObject.GetComponent<PowerupBehaviourScript>().CounterCheck()) {
 				livesCount++;
 				Debug.Log ("1-UP");
 			}
 
-		} else {
+		}
+        else if (other.gameObject.tag == "Mushroom")
+        {
+            healthState++;
+            Debug.Log("Supersize");
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.tag == "Fire Flower")
+        {
+            healthState++;
+            Debug.Log("Fire!!!");
+            Destroy(other.gameObject);
+        }
+        else {
 			if (other.gameObject.GetComponent<PipeScript> () != null) {
 				pipeToUse = other.gameObject;
 			}
@@ -184,5 +200,10 @@ public class PlayerBehaviourScript : MonoBehaviour {
 	void OnCollisionExit2D(Collision2D other) {
 		pipeToUse = null;
 	}
+
+    public int HealthCheck()
+    {
+        return healthState;
+    }
 
 }

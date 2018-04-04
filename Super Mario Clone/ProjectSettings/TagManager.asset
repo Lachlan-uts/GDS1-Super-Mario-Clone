@@ -8,6 +8,8 @@ TagManager:
   - Powerup
   - Pit
   - Ground
+  - Mushroom
+  - Fire Flower
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - Camera
   - Ground
   - Blocks
-  - 
+  - Powerups
   - 
   - 
   - 

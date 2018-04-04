@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class PowerupBehaviourScript : MonoBehaviour {
 
-	public int typeOfPower = 0; // For reference: 0 = Mushroom, 1 = Fire Flower, 2 = 1-UP
+    public GameObject mushroom;
+    public GameObject fireFlower;
 
-	private Rigidbody2D powerupRB2D;
+    public int levelOfPower = 0; // For reference: 0 = Mushroom, 1 = Fire Flower, 2 = 1-UP
+    private int counter;
+
+	
 
 	// Use this for initialization
 	void Start () {
-		powerupRB2D = GetComponent<Rigidbody2D> ();
+        counter = 0;
 	}
 	
 	// Update is called once per frame
@@ -18,15 +22,22 @@ public class PowerupBehaviourScript : MonoBehaviour {
 		
 	}
 
-	public void BeginMovement() {
-		if (typeOfPower == 0 || typeOfPower == 2) {
-			powerupRB2D.AddForce (Vector2.right * 2, ForceMode2D.Impulse);
-		}
-	}
+    public bool CounterCheck()
+    {
+        return counter == 0;
+    }
 
 	void OnCollisionEnter2D(Collision2D other) {
-		if (other.gameObject.tag == "Player") {
-			Destroy (this.gameObject);
-		}
+		if (other.gameObject.tag == "Player" && CounterCheck() && other.gameObject.GetComponent<PlayerBehaviourScript>().HealthCheck() == 0) {
+            Instantiate(mushroom, this.gameObject.GetComponentInChildren<Transform>().transform);
+            counter++;
+        }
+        else if (other.gameObject.tag == "Player" && CounterCheck() && other.gameObject.GetComponent<PlayerBehaviourScript>().HealthCheck() == 1)
+        {
+            Instantiate(fireFlower, this.gameObject.GetComponentInChildren<Transform>().transform);
+            counter++;
+        }
 	}
+
+
 }
