@@ -17,16 +17,34 @@ public class EnemyController : MonoBehaviour {
 	public LayerMask whatIsGround;
 	float groundRadius = 0.1f;
 
-
+	private Renderer rend;
+	private Camera cam;
+	private Plane[] planes;
+	private bool disabled = true;
 
 	private Rigidbody2D enemyRB2D;
 
 	void Start () {
+		cam = Camera.main;
+		planes = GeometryUtility.CalculateFrustumPlanes (cam);
+		rend = this.GetComponent<Renderer> ();
 		enemyRB2D = GetComponent<Rigidbody2D> ();
 	}
 
+	void Update() {
+		if (rend.isVisible) {
+			Debug.Log ("visable");
+			if (disabled == true) {
+				BeginMovement ();
+			}
+		}
+		Debug.Log (enemyRB2D.velocity);
+	}
+
 	public void BeginMovement() {
-			enemyRB2D.AddForce (Vector2.left * 2, ForceMode2D.Impulse);
+		enemyRB2D.AddForce (Vector2.right * 2, ForceMode2D.Impulse);
+		disabled = false;
+		Debug.Log (enemyRB2D.velocity);
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
@@ -40,7 +58,20 @@ public class EnemyController : MonoBehaviour {
 		Debug.Log ("contacted");
 		foreach (ContactPoint2D contact in contacts) {
 			Debug.DrawRay (contact.point, contact.normal, Color.white, 4.0f);
-			Debug.Log ("contacted and foreached");
+			Debug.Log (contact.relativeVelocity.x);
+		}
+		if (contacts [0].relativeVelocity.x < 0) {
+			Debug.Log ("trying to change velocity");
+			//enemyRB2D.velocity.Set (-(contacts [0].relativeVelocity.x), enemyRB2D.velocity.y);
+
+
+			enemyRB2D.velocity = new Vector2(-2,enemyRB2D.velocity.y);
+//			enemyRB2D.AddForce (Vector2.left * 2, ForceMode2D.Impulse);
+			Debug.Log (enemyRB2D.velocity);
+		} else if (contacts [0].relativeVelocity.x > 0) {
+			
+			enemyRB2D.velocity = new Vector2(2,enemyRB2D.velocity.y);
+//			enemyRB2D.AddForce (Vector2.right * 2, ForceMode2D.Impulse);
 		}
 	}
 
