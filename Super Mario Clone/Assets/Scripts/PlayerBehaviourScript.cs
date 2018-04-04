@@ -4,88 +4,104 @@ using UnityEngine;
 
 public class PlayerBehaviourScript : MonoBehaviour {
 
-	public float speed;
-	public float baseSpeed;
-	public float maxSpeed;
-	public float jumpForce;
-	public float jumpTime;
-	public float jumpTimeCounter;
-	public bool stoppedJumping;
+    public float speed;
+    public float baseSpeed;
+    public float maxSpeed;
+    public float jumpForce;
+    public float jumpTime;
+    public float jumpTimeCounter;
+    public bool stoppedJumping;
 
-	public bool grounded;
-	public Transform groundCheck;
-	public LayerMask whatIsGround;
-	float groundRadius = 0.1f;
+    public bool grounded;
+    public Transform groundCheck;
+    public LayerMask whatIsGround;
+    float groundRadius = 0.1f;
 
-	// serialized private variables
-	[SerializeField]
-	private GameObject fireball;
+    // serialized private variables
+    [SerializeField]
+    private GameObject fireball;
 
-	// private variables
+    // private variables
 
-	private Rigidbody2D playerRB2D;
+    private Rigidbody2D playerRB2D;
 
-	private int healthState;
+    private int healthState;
 
-	private int livesCount;
+    private int livesCount;
 
-	private bool facingRight;
+    private bool facingRight;
+
+
+    //Timer branch with Respawn
+    public int currentHealth;
+    bool isDead;
+    bool damaged;
+    //Small Mario & Big Mario
+    bool bigMario;
+    RespawnManager respawnManager;
 
 	private GameObject pipeToUse; // Important for usage of pipes
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
 
-		playerRB2D = GetComponent<Rigidbody2D> ();
+        playerRB2D = GetComponent<Rigidbody2D>();
 
-		jumpTimeCounter = jumpTime;
 
+        jumpTimeCounter = jumpTime;
 		healthState = 0; // In short, take a single hit, death ensues
 		livesCount = 3;
 		facingRight = true;
 		pipeToUse = null;
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-		grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
 
-		if(grounded){
-			jumpTimeCounter = jumpTime;
-		}
+        healthState = 0; // In short, take a single hit, death ensues
+        livesCount = 3;
+        currentHealth = livesCount;
+        facingRight = true;
 
-		if(Input.GetMouseButtonDown(0)){
-			if(grounded){
-				playerRB2D.velocity = new Vector2(playerRB2D.velocity.x, jumpForce);
-				stoppedJumping = false;
-			}
-		}
+        respawnManager = GameObject.FindGameObjectWithTag("RespawnManager").GetComponent<RespawnManager>();
+    }
 
-		if(Input.GetMouseButtonUp(0)){
-			jumpTimeCounter = 0;
-			stoppedJumping = true;
-		}
+    // Update is called once per frame
+    void Update() {
 
-		while(Input.GetMouseButtonUp(1) && (speed > baseSpeed)){
-			 speed -= 0.5f;
-		}
-	}
+        grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
 
-	void FixedUpdate() {
+        if (grounded) {
+            jumpTimeCounter = jumpTime;
+        }
+
+        if (Input.GetMouseButtonDown(0)) {
+            if (grounded) {
+                playerRB2D.velocity = new Vector2(playerRB2D.velocity.x, jumpForce);
+                stoppedJumping = false;
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0)) {
+            jumpTimeCounter = 0;
+            stoppedJumping = true;
+        }
+
+        while (Input.GetMouseButtonUp(1) && (speed > baseSpeed)) {
+            speed -= 0.5f;
+        }
+    }
+
+    void FixedUpdate() {
 
 
-		float move = Input.GetAxis("Horizontal");
-		if(Input.GetMouseButton(1) && speed < maxSpeed && grounded){
-			speed += 0.5f;
-		}
-		
-		playerRB2D.velocity = new Vector2(move * speed, playerRB2D.velocity.y);
+        float move = Input.GetAxis("Horizontal");
+        if (Input.GetMouseButton(1) && speed < maxSpeed && grounded) {
+            speed += 0.5f;
+        }
 
-		if((Input.GetMouseButton(0)) && !stoppedJumping)  {
-            if(jumpTimeCounter > 0){
-                playerRB2D.velocity = new Vector2 (playerRB2D.velocity.x, jumpForce);
+        playerRB2D.velocity = new Vector2(move * speed, playerRB2D.velocity.y);
+
+        if ((Input.GetMouseButton(0)) && !stoppedJumping) {
+            if (jumpTimeCounter > 0) {
+                playerRB2D.velocity = new Vector2(playerRB2D.velocity.x, jumpForce);
                 jumpTimeCounter -= Time.deltaTime;
             }
         }
@@ -158,44 +174,91 @@ public class PlayerBehaviourScript : MonoBehaviour {
 
 	}
 
-	void OnCollisionEnter2D(Collision2D other) {
-
-
-		ContactPoint2D[] contacts = new ContactPoint2D[10];
-		//contacts. other.GetContacts;
-
-		Debug.Log ("contacted");
-		foreach (ContactPoint2D contact in other.contacts) {
-			Debug.DrawRay (contact.point, contact.normal, Color.white, 4.0f);
-
-			Debug.Log ("contacted and foreached");
-		}
-
-
-		if (other.gameObject.tag == "Powerup") { // If the player comes into contact with a powerup
-			Debug.Log ("CollisionWithPowerup");
-			if (healthState == 0 && other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 0) {
-				healthState++;
-				Debug.Log ("Mushroom");
-			} else if (healthState < 2 && other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 1) {
-				healthState = 2;
-				Debug.Log ("Fire Flower");
-			} else if (other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 2) {
-				livesCount++;
-				Debug.Log ("1-UP");
-			}
-
-		} else {
-			if (other.gameObject.GetComponent<PipeScript> () != null) {
-				pipeToUse = other.gameObject;
-			}
-		}
-
-
-	}
+//	void OnCollisionEnter2D(Collision2D other) {
+//		if (other.gameObject.tag == "Powerup") { // If the player comes into contact with a powerup
+//			Debug.Log ("CollisionWithPowerup");
+//			if (healthState == 0 && other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 0) {
+//				healthState++;
+//				Debug.Log ("Mushroom");
+//			} else if (healthState < 2 && other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 1) {
+//				healthState = 2;
+//				Debug.Log ("Fire Flower");
+//			} else if (other.gameObject.GetComponent<PowerupBehaviourScript> ().typeOfPower == 2) {
+//				livesCount++;
+//				Debug.Log ("1-UP");
+//			}
+//
+//		} else {
+//			if (other.gameObject.GetComponent<PipeScript> () != null) {
+//				pipeToUse = other.gameObject;
+//			}
+//		}
+//
+//
+//	}
 
 	void OnCollisionExit2D(Collision2D other) {
 		pipeToUse = null;
-	}
 
+    }
+
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Powerup")
+        { // If the player comes into contact with a powerup
+            Debug.Log("CollisionWithPowerup");
+            if (healthState == 0 && other.gameObject.GetComponent<PowerupBehaviourScript>().typeOfPower == 0)
+            {
+                healthState++;
+                bigMario = true;
+                Debug.Log("Mushroom");
+            }
+            else if (healthState < 2 && other.gameObject.GetComponent<PowerupBehaviourScript>().typeOfPower == 1)
+            {
+                healthState = 2;
+                bigMario = true;
+                Debug.Log("Fire Flower");
+            }
+            else if (other.gameObject.GetComponent<PowerupBehaviourScript>().typeOfPower == 2)
+            {
+                livesCount++;
+                currentHealth++;
+                Debug.Log("1-UP");
+            }
+
+        }
+    }
+    //Timer branch with Respawn, works with 1 up prefab and fireflower 
+    public void takeDamage(int amount)
+    {
+        if (bigMario == false)
+        {
+            damaged = true;
+            currentHealth -= amount;
+            respawnManager.RespawnPlayer();
+        }
+        if (bigMario == true)
+        {
+            bigMario = false;
+            healthState = 0;
+        }
+        if (currentHealth <= 0 && !isDead)
+        {
+            death();
+        }
+    }
+    void death()
+    {
+        isDead = true;
+        Debug.Log("Dead");
+        //Restart Game
+
+
+    }
+
+    public bool isBig()
+    {
+        return bigMario;
+    }
 }

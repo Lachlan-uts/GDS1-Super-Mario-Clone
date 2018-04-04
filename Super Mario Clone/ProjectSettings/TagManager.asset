@@ -8,6 +8,9 @@ TagManager:
   - Powerup
   - Pit
   - Ground
+  - RespawnPoint
+  - RespawnManager
+  - Timer
   layers:
   - Default
   - TransparentFX
